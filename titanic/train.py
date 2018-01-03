@@ -7,7 +7,7 @@ from keras.models import Sequential
 from data import training_data, target_data
 
 model = Sequential()
-model.add(Dense(12, activation='relu', input_shape=(5,)))
+model.add(Dense(12, activation='relu', input_shape=(6,)))
 model.add(Dense(8, activation='relu'))
 model.add(Dense(1, activation='sigmoid'))
 

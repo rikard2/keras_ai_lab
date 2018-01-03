@@ -16,11 +16,15 @@ ds = pd.read_csv('datasets/titanic.csv')
 #   Cabin       Cabin number
 #   Embarked    Port of Embarkation    C = Cherbourg, Q = Queenstown, S = Southampton
 
-def binary_sex(row):
+def sex(row):
     return 1 if (row['Sex'] == 'male') else 0
 
-ds = ds.drop(["PassengerId", "Name", "Cabin", "Embarked", "Ticket", "Fare"], axis=1)
-ds['Sex'] = ds.apply(binary_sex, axis=1)
+def embarked(row):
+    return 1 if (row['Embarked'] == 'C') else 2 if (row['Embarked'] == 'Q') else 3 if (row['Embarked'] == 'S') else 0
+
+ds = ds.drop(["PassengerId", "Name", "Cabin", "Ticket", "Fare"], axis=1)
+ds['Sex'] = ds.apply(sex, axis=1)
+ds['Embarked'] = ds.apply(embarked, axis=1)
 ds.fillna(0, inplace=True)
 
 training_data = np.array(ds.ix[:, 1:])
